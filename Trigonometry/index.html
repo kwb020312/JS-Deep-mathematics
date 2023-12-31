@@ -46,9 +46,25 @@
         const c = distance(A, B);
         const a = distance(B, C);
         const b = distance(A, C);
+
+        const sin = a / c;
+        const cos = b / c;
+        const tan = sin / cos; // a/b
+        const theta = Math.asin(sin);
+
         ctx.clearRect(-offset.x, -offset.y, myCanvas.width, myCanvas.height);
 
         drawCoordinateSystem(ctx, offset);
+
+        drawText(`sin = a/c = ${sin.toFixed(2)}`, {
+          x: -offset.x / 2,
+          y: offset.y * 0.7,
+        });
+
+        drawText(`0 = ${theta.toFixed(2)} (${Math.round(toDeg(theta))})'`, {
+          x: offset.x / 2,
+          y: offset.y * 0.7,
+        });
 
         drawLine(A, B);
         drawText(`c`, average(A, B));
@@ -58,6 +74,22 @@
         drawText(`a`, average(B, C));
 
         drawText("0", A);
+
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        const start = B.x > A.x ? 0 : Math.PI;
+        const clockwise = (B.y < C.y) ^ (B.x > A.x);
+        let end = B.y < C.y ? -theta : theta;
+        if (B.x < A.x) {
+          end = Math.PI - end;
+        }
+        ctx.arc(0, 0, 20, start, end, !clockwise);
+        ctx.stroke();
+      }
+
+      function toDeg(rad) {
+        return (rad * 180) / Math.PI;
       }
 
       function average(p1, p2) {
