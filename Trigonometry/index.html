@@ -56,10 +56,32 @@
 
         drawCoordinateSystem(ctx, offset);
 
-        drawText(`sin = a/c = ${sin.toFixed(2)}`, {
-          x: -offset.x / 2,
-          y: offset.y * 0.7,
-        });
+        drawText(
+          `sin = a/c = ${sin.toFixed(2)}`,
+          {
+            x: -offset.x / 2,
+            y: offset.y * 0.7,
+          },
+          "red"
+        );
+
+        drawText(
+          `cos = b/c = ${cos.toFixed(2)}`,
+          {
+            x: -offset.x / 2,
+            y: offset.y * 0.8,
+          },
+          "blue"
+        );
+
+        drawText(
+          `tan = a/b = ${tan.toFixed(2)}`,
+          {
+            x: -offset.x / 2,
+            y: offset.y * 0.9,
+          },
+          "magenta"
+        );
 
         drawText(`0 = ${theta.toFixed(2)} (${Math.round(toDeg(theta))})'`, {
           x: offset.x / 2,
@@ -68,10 +90,10 @@
 
         drawLine(A, B);
         drawText(`c`, average(A, B));
-        drawLine(A, C);
-        drawText(`b`, average(A, C));
-        drawLine(B, C);
-        drawText(`a`, average(B, C));
+        drawLine(A, C, "blue");
+        drawText(`b`, average(A, C), "blue");
+        drawLine(B, C, "red");
+        drawText(`a`, average(B, C), "red");
 
         drawText("0", A);
 
