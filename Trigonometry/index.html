@@ -12,7 +12,13 @@
       height="500px"
       style="background-color: white"
     ></canvas>
-
+    <br /><br />
+    <canvas
+      id="chartCanvas"
+      width="500px"
+      height="100px"
+      style="background-color: white"
+    ></canvas>
     <style>
       body {
         background-color: black;
@@ -22,15 +28,23 @@
     </style>
     <script>
       const ctx = myCanvas.getContext("2d");
+      const chartCtx = chartCanvas.getContext("2d");
       const offset = {
         x: myCanvas.width / 2,
         y: myCanvas.height / 2,
+      };
+      const chartOffset = {
+        x: chartCanvas.width / 2,
+        y: chartCanvas.height / 2,
       };
       const A = { x: 0, y: 0 };
       const B = { x: 90, y: 120 };
       const C = { x: B.x, y: 0 };
 
       ctx.translate(offset.x, offset.y);
+      chartCtx.translate(chartOffset.x, chartOffset.y);
+
+      drawCoordinateSystem(chartCtx, chartOffset);
 
       update();
       document.onmousemove = (event) => {
@@ -108,6 +122,16 @@
         }
         ctx.arc(0, 0, 20, start, end, !clockwise);
         ctx.stroke();
+
+        const chartScaler = chartOffset.y;
+        drawPoint(
+          {
+            x: theta * chartScaler,
+            y: sin * chartScaler,
+          },
+          2,
+          "red"
+        );
       }
 
       function toDeg(rad) {
