@@ -1,8 +1,3 @@
-# JS-Deep-mathematics
-
-### 🔺Euclidean Distance
-
-```javascript
 function euclideanDistance(p1, p2) {
   // 두 점이 N차원으로 같은 공간에 있는지 확인
   if (p1.length !== p2.length) {
@@ -21,4 +16,3 @@ function euclideanDistance(p1, p2) {
 // 0, 0 의 좌표에서 3, 4의 좌표까지의 거리는 5이다.
 const result = euclideanDistance([0, 0], [3, 4]);
 console.log(result); // 5
-```
